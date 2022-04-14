@@ -1,0 +1,85 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+*,*::before,*::after{
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+input,button,textarea{font-family: inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner{padding: 0;border: 0;}
+a, a:visited{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+h1,h2,h3,h4,h5,h6{font-size: inherit;font-weight: 400;}
+/*-------------------------------------------*/
+
+.main_block{
+display:flex;
+justify-content: center;
+align-items: center;
+position: relative;
+}
+
+.play_field{
+margin-top: 100px;
+flex: 0 1 400px;
+height: 400px;
+display: flex;
+flex-wrap: wrap;
+}
+
+.cell{
+flex: 0 1 40px;
+height: 40px;
+border: 1px solid #000;
+}
+
+.how_to_play{
+position: absolute;
+top: 5%;
+left: 5%;
+line-height: 20px;
+}
+
+.counter{
+position: absolute;
+top: 5%;
+right: 10%;
+font-size: 18px;
+line-height: 20px;
+}
+
+.start_button{
+position: absolute;
+bottom: -10%;
+right: 45%;
+border: 1px solid #000;
+padding: 4px;
+background-color: rgb(174, 223, 41);
+}
+
+.body{
+background-color: rgb(27, 179, 65);
+}
+
+.target{
+background: url("https://icons.veryicon.com/png/o/food--drinks/fruit-icon/apple-114.png") center center/35px 35px no-repeat;
+}
