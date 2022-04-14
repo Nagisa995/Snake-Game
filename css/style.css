@@ -70,10 +70,11 @@ line-height: 20px;
 .start_button{
 position: absolute;
 bottom: -10%;
-right: 47.9%;
+right: 45%;
 border: 1px solid #000;
 padding: 4px;
 background-color: rgb(174, 223, 41);
+width: 10%;
 }
 
 .body{
