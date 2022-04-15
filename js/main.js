@@ -27,6 +27,7 @@ function setDefaultSetup() {
     setInStorage('target', generateTarget());
     setInStorage('score', DEFAULT_SCORE);
     setInStorage('direction', DEFAULT_DIRECTION);
+    setInStorage('currentDirection', DEFAULT_DIRECTION);
 }
 
 setDefaultSetup();
@@ -35,11 +36,15 @@ DEFAULT_UI_ELEMENTS.START_BUTTON.addEventListener('click', playGame);
 document.body.addEventListener('keydown', changeDirection);
 
 function playGame() {
-    snakeMove();
+    const game = snakeMove();
     const playField = fillTheField();
     fieldOnUI(playField);
 
-    setTimeout(playGame, 500);
+    if (game !== 'gameover'){
+        setTimeout(playGame, 500);
+    } else {
+        setDefaultSetup();
+    }
 }
 
 function fillTheField() {
@@ -70,10 +75,11 @@ function snakeMove() {
         default: nextHead[0]--
     }
 
-    const nextHeadInBody = snakeBody.includes(nextHead);
-
-    if (nextHeadInBody) {
-        return 'Game Over';
+    for (let element of snakeBody){
+        if (compareCoordinates(element, nextHead)) {
+            alert (`Game Over!\nYour Score:${getFromStorage('score')}`);
+            return 'gameover';
+        }
     }
 
     snakeBody.push(nextHead);
