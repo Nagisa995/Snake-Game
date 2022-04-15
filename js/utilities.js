@@ -26,9 +26,10 @@ export function generateTarget() {
     const newTarget = [randomCoordinate(), randomCoordinate()];
     const currentSnakeBody = getFromStorage('snakeBody');
 
-    const targetIsNotValid = currentSnakeBody.includes(newTarget);
-    if (targetIsNotValid) {
-        return generateTarget();
+    for (let element of currentSnakeBody){
+        if (compareCoordinates(element, newTarget)) {
+            return generateTarget();
+        }
     }
 
     return newTarget;
