@@ -9,7 +9,8 @@ import {
     generateTarget,
     changeDirection,
     generateEmptyField,
-    compareCoordinates
+    compareCoordinates,
+    generateHead
 } from './utilities.js'
 
 import {
@@ -39,8 +40,8 @@ function playGame() {
     const playField = fillTheField();
     fieldOnUI(playField);
 
-    if (game !== 'gameover'){
-        setTimeout(playGame, 500);
+    if (game !== 'gameover') {
+        setTimeout(playGame, 300);
     } else {
         setDefaultSetup();
     }
@@ -60,37 +61,30 @@ function fillTheField() {
 function snakeMove() {
     const snakeBody = getFromStorage('snakeBody');
     const currentTarget = getFromStorage('target');
-    const currentDirection = getFromStorage('direction');
 
-    const nextHead = [snakeBody[snakeBody.length - 1][0], snakeBody[snakeBody.length - 1][1]];
-
-    switch (currentDirection) {
-        case ('right'): nextHead[1]++
-            break;
-        case ('bottom'): nextHead[0]++
-            break;
-        case ('left'): nextHead[1]--
-            break;
-        default: nextHead[0]--
-    }
-
-    for (let element of snakeBody){
-        if (compareCoordinates(element, nextHead)) {
-            alert (`Game Over!\nYour Score:${getFromStorage('score')}`);
-            return 'gameover';
-        }
-    }
-
-    snakeBody.push(nextHead);
+    const currentHead = [snakeBody[snakeBody.length - 1][0], snakeBody[snakeBody.length - 1][1]];
+    const nextHead = generateHead(currentHead)
 
     const targetReach = compareCoordinates(nextHead, currentTarget);
 
     if (targetReach) {
         scoreCounter();
+
+        snakeBody.push(nextHead);
+        setInStorage('snakeBody', snakeBody);
+
         setInStorage('target', generateTarget());
     } else {
-        snakeBody.splice(0, 1);        
-    }
+        snakeBody.splice(0, 1);
 
-    setInStorage('snakeBody', snakeBody);
+        for (let element of snakeBody) {
+            if (compareCoordinates(element, nextHead)) {
+                alert(`Game Over!\nYour Score:${getFromStorage('score')}`);
+                return 'gameover';
+            }
+        }
+
+        snakeBody.push(nextHead);
+        setInStorage('snakeBody', snakeBody);
+    }
 }

@@ -55,8 +55,25 @@ export function changeDirection(event) {
     }
 }
 
-export function coordinateIsNotValid(coordinate) {
-    return (coordinate == 9 || coordinate == 0) ? true : false
+
+export function generateHead(currentHead) {
+    const currentDirection = getFromStorage('direction');
+
+    switch (currentDirection) {
+        case ('right'): return [currentHead[0], nextCoordinate('next', currentHead[1])];
+        case ('bottom'): return [nextCoordinate('next', currentHead[0]), currentHead[1]];
+        case ('left'): return [currentHead[0], nextCoordinate('previous', currentHead[1])];
+        default: return [nextCoordinate('previous', currentHead[0]), currentHead[1]];
+    }
+}
+
+function nextCoordinate(action, coordinate) {
+    if (action == 'next') {
+        return ((coordinate + 10) + 1) % 10;
+    } else {
+        return ((coordinate + 10) - 1) % 10;
+    }
+
 }
 
 export function compareCoordinates(first, second) {
