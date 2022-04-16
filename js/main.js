@@ -27,7 +27,6 @@ function setDefaultSetup() {
     setInStorage('target', generateTarget());
     setInStorage('score', DEFAULT_SCORE);
     setInStorage('direction', DEFAULT_DIRECTION);
-    setInStorage('currentDirection', DEFAULT_DIRECTION);
 }
 
 setDefaultSetup();

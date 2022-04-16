@@ -26,7 +26,7 @@ export function generateTarget() {
     const newTarget = [randomCoordinate(), randomCoordinate()];
     const currentSnakeBody = getFromStorage('snakeBody');
 
-    for (let element of currentSnakeBody){
+    for (let element of currentSnakeBody) {
         if (compareCoordinates(element, newTarget)) {
             return generateTarget();
         }
@@ -41,14 +41,15 @@ function randomCoordinate() {
 }
 
 export function changeDirection(event) {
+    const currentDirection = getFromStorage('direction');
     switch (event.code) {
-        case ('KeyD'): setInStorage('direction', 'right')
+        case ('KeyD'): if (currentDirection !== 'left') setInStorage('direction', 'right');
             break;
-        case ('KeyS'): setInStorage('direction', 'bottom')
+        case ('KeyS'): if (currentDirection !== 'up') setInStorage('direction', 'bottom');
             break;
-        case ('KeyA'): setInStorage('direction', 'left')
+        case ('KeyA'): if (currentDirection !== 'right') setInStorage('direction', 'left');
             break;
-        case ('KeyW'): setInStorage('direction', 'up')
+        case ('KeyW'): if (currentDirection !== 'bottom') setInStorage('direction', 'up');
             break;
         default: return;
     }
